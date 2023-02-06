@@ -4,11 +4,13 @@ const mongoose = require('mongoose')
 const heroesSchema = new mongoose.Schema({
     hero_id: {
         type: Number,
-        require
+        require,
+        unique: true
     },
     name: {
         type: String,
-        require
+        require,
+        unique: true
     },
     eye_color: {
         type: String
@@ -40,4 +42,4 @@ const heroesSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Heroes', heroesSchema)
+module.exports = mongoose.model('hero_information', heroesSchema, 'hero_information')

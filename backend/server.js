@@ -43,6 +43,14 @@ app.use( function(req, res, next) {
 const heroesRouter = require('./routes/heroes')
 app.use('/heroes', heroesRouter)
 
+const publishersRouter = require('./routes/publisher')
+app.use('/publisher', publishersRouter)
+
+const genderRouter = require('./routes/gender')
+app.use('/gender', genderRouter)
+
+const alignmentRouter = require('./routes/alignment')
+app.use('/alignment', alignmentRouter)
 
 app.use(function(req,res){
     res.type('text/plain');

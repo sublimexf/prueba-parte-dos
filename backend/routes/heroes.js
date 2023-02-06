@@ -12,27 +12,25 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const heroe = new Heroes({
-        hero_id: 1,
-        name: "hero1",
-        publisher_id: 1
-    })
+    const hero = new Heroes(req.body)
     try {
-        const newHeroe = await heroe.save()
-        res.status(201).json(newHeroe)
+        const newHero = await hero.save()
+        res.status(201).json(newHero)
     } catch (err) {
         res.status(400).json({ message: err.message })
     }
 })
-
+// 
 router.patch('/:id', getHeroe, async (req, res) => {
-    if (req.body.name != null) {
-        res.heroe.name = req.body.name
+    const hero = new Heroes(req.body)
+    for (const key in req.body) {
+        if (hero[key] !== null)
+            res.hero[key] = hero[key]
     }
 
     try {
-        const updatedHeroe = await res.heroe.save()
-        res.json(updatedHeroe)
+        const updatedHero = await res.hero.save()
+        res.json(updatedHero)
     } catch (err) {
         res.status(400).json({ message: err.message })
     }
@@ -40,23 +38,23 @@ router.patch('/:id', getHeroe, async (req, res) => {
 
 router.delete('/:id', getHeroe, async (req, res) => {
     try {
-        await res.heroe.remove()
-        res.json({ message: 'Deleted heroe' })
+        await res.hero.remove()
+        res.json({ message: 'Deleted hero' })
     } catch (err) {
         res.status(500).json({ message: err.message })
     }
 })
 
 async function getHeroe(req, res, next) {
-    let heroe
+    let hero
     try {
-        heroe = await Heroes.findById(req.params.id)
-        if (heroe == null)
-            return res.status(404).json({ message: 'Cannot find suscriber' })
+        hero = await Heroes.findById(req.params.id)
+        if (hero == null)
+            return res.status(404).json({ message: 'Cannot find hero' })
     } catch (err) {
         return res.status(500).json({ message: err.message })
     }
-    res.heroe = heroe
+    res.hero = hero
     next()
 }
 
