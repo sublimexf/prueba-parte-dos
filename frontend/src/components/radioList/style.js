@@ -4,15 +4,17 @@ export const RadioContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 60%;
+    width: 40%;
 `
 
 export const RadiosTitle = styled.h2`
     width: 100%;
     margin: 0;
+    text-align-last: left;
 `
 
 export const RadioLabel = styled.label`
+width: 10.5em;
 display: inline-flex;
 align-items: center;
 cursor: pointer;
@@ -20,12 +22,7 @@ float: left;
 -webkit-user-select: none;
 user-select: none;
 cursor: pointer;
-
-margin-top: 10px;
-
-&:not(:first-child) {
-    margin-left: 20px
-}
+margin-top: 20px;
 `
 
 export const RadioSVG = styled.svg`

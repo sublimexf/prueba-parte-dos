@@ -3,19 +3,22 @@ import styled from 'styled-components'
 export const SearchBarContainer = styled.div`
     display: flex;
     align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 `
 
 
 export const InputContainer = styled.div`
     display: flex;
     border: solid green 1px;
-    width: 40%;
+    width: calc(50% - 84px);
     height 40px;
     padding: 1%;
     margin: 1%;
     border-radius: 10px;
 	cursor: pointer;
     padding-left: 12px;
+    margin-right: 20px;
     
 
     ${props => props.isFocused ? `
@@ -35,6 +38,23 @@ export const Input = styled.input`
     :focus {
         outline: none;
         border-color: red; 
+    }
+`
+
+export const AddButton = styled.button`
+    width: auto;
+    height: auto;
+    color: white;
+    background: #039961;
+    font-size: 25px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 10px;
+
+    &:hover {
+        background: #349334;
     }
 `
 

@@ -1,12 +1,10 @@
 import { useState } from "react"
 import useOutsideClick from "../../hooks/useOutSideClick";
-import RadioList from "../radio";
-import Radio from "../radio";
-import { Input, InputContainer, RadioContainer, SearchBarContainer, SearchIcon } from "./style"
+import RadioList from "../radioList";
+import { AddButton, Input, InputContainer, SearchBarContainer, SearchIcon } from "./style"
 
 const SearchBar = () => {
     const [isFocused, setFocused] = useState(false)
-    
     const outSideClick = useOutsideClick(() => setFocused(false))
     const radioList = [
         "Casa publicadora",
@@ -28,6 +26,8 @@ const SearchBar = () => {
             </InputContainer>
 
             <RadioList radioList={radioList}/>
+
+            <AddButton>Nuevo Heroe</AddButton>
             
         </ SearchBarContainer>
     )

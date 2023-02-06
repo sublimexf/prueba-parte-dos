@@ -18,7 +18,7 @@ const Radio = ({ children, selected }) => {
 
 const RadioList = ({radioList}) => {
     const [radioSelected, setRadio] = useState(0)
-    console.log(radioList)
+    
     return (
         <RadioContainer>
             <RadiosTitle>Opciones de Busqueda</RadiosTitle>
