@@ -1,12 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import Api from "../api"
+import Api from "../../api"
+
 
 const initialState = {
     heroes: [],
     loading: 'idle'
 }
 
-export const FetchHeroes = createAsyncThunk('Heroes/fetchHeroes', async () =>{
+export const FetchHeroes = createAsyncThunk('Heroes/fetchHeroes', async (data) => {
+    if (data) {
+        const url = data[0]
+        const value = data[1]
+        return await Api.getBy(url, value)
+    }
     return await Api.getHeroes()
 })
 

@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { RadioCircle, RadioContainer, RadioInput, RadioLabel, RadioPath, RadiosTitle, RadioSVG, RadioText } from "./style";
 
-const Radio = ({ children, selected }) => {
+const Radio = ({ children, selected, onClick }) => {
     return (
-        <RadioLabel htmlFor={children?.toString()} >
+        <RadioLabel htmlFor={children?.toString()} onClick={onClick} >
             <RadioInput type="radio" id={children?.toString()} name="radio" defaultChecked={selected} />
             <RadioSVG width="20px" height="20px" viewBox="0 0 20 20">
                 <RadioCircle cx="10" cy="10" r="9" />
@@ -16,21 +15,26 @@ const Radio = ({ children, selected }) => {
     )
 }
 
-const RadioList = ({radioList}) => {
-    const [radioSelected, setRadio] = useState(0)
+const RadioList = ({ radioList, setUrl }) => {
+    const auxSetUrl = (radioSelected) => {
+        setUrl( radioSelected === 0 ? "publisher" :
+                radioSelected === 1 ? "race" :
+                radioSelected === 2 ? "gender" :
+                radioSelected === 3 ? "alignment" : null )
+    }
     
     return (
         <RadioContainer>
             <RadiosTitle>Opciones de Busqueda</RadiosTitle>
-        {
-            radioList.map((text, key) =>
-                <Radio 
-                        onClick={ () => setRadio(key) } 
-                        selected={radioSelected === key}
+            {
+                radioList.map((text, key) =>
+                    <Radio
+                        onClick={() => auxSetUrl(key)}
+                        selected={0 === key}
                         key={key}
                     >{text}</Radio>
-            )
-        }
+                )
+            }
         </RadioContainer>
     )
 }

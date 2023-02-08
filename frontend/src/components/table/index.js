@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { FetchHeroes } from "../../redux/heroesSlice";
+import { FetchHeroes } from "../../redux/slices/heroesSlice";
 import { TableContainer, Th } from "./style";
 import TableRow from "./tableRow";
 
@@ -33,8 +33,16 @@ const Table = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {heroesState.map((hero, key) =>
-                        <TableRow hero={hero} key={key} />
+                    { heroesState !== undefined && heroesState.map((hero, key) =>{
+                        let auxhero = {
+                            name: hero.name,
+                            publisher: hero.publisher[0].publisher_name,
+                            gender: hero.gender[0] ? hero.gender[0].name : "-",
+                            height: hero.height,
+                            weight: hero.weight
+                        }
+                        return ( <TableRow hero={auxhero} key={key} heroComp={hero} /> )
+                    }
                     )}
                 </tbody>
             </table>
