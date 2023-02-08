@@ -4,6 +4,8 @@ const app = express();
 const port = 8080;
 const mongoose = require('mongoose');
 
+mongoose.set("strictQuery", false);
+
 mongoose.connect(
   process.env.DATABASE_URL, 
   { 
@@ -28,11 +30,11 @@ app.use(bodyParser.json());
 
 app.use( function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE, OPTIONS');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   if ('OPTIONS' === req.method) {
     //respond with 200
-    res.send(200);
+    res.status(200).json({ message: "" });
   }
   else {
   //move on
@@ -52,17 +54,19 @@ app.use('/gender', genderRouter)
 const alignmentRouter = require('./routes/alignment')
 app.use('/alignment', alignmentRouter)
 
+const searchRouter = require('./routes/searchs')
+app.use('/search', searchRouter)
+
+
 app.use(function(req,res){
     res.type('text/plain');
-    res.status(404);
-    res.send('404 - Not Found');
+    res.status(404).json({ message: "Not Found" });
   });
   
   app.use(function(err, req, res, next){
     console.error(err.stack);
     res.type('plain/text');
-    res.status(500);
-    res.send('500 - Server Error');
+    res.status(500).json({ message: "Server Error" });
   });
   
 
